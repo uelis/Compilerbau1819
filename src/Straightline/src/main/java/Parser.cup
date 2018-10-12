@@ -1,0 +1,93 @@
+import java_cup.runtime.*;
+import java.util.List;
+import java.util.LinkedList;
+import java.util.Collections;
+
+parser code  {:
+
+  private String errorMessage = "Unknown Error";
+
+  @Override
+  public void syntax_error(java_cup.runtime.Symbol token) {
+    errorMessage = "Syntax error at line " + (token.left + 1) +
+   	    ", column " + (token.right + 1) + ".";
+  }
+
+  @Override
+  public void unrecovered_syntax_error(Symbol cur_token) throws ParseException {
+    report_fatal_error(errorMessage, cur_token);
+  }
+
+  @Override
+  public void report_fatal_error(String message, Object info) throws ParseException {
+    throw new ParseException(message);
+  }
+
+:};
+
+
+/* Terminalsymbole, die vom Lexer produziert werden. */
+terminal String IDENTIFIER;
+terminal Integer INT;
+terminal PRINT;
+terminal EQ;
+terminal PLUS;
+terminal MINUS;
+terminal TIMES;
+terminal DIVIDE;
+terminal COMMA;
+terminal LPAREN;
+terminal RPAREN;
+terminal SEMICOLON;
+// EOF is created automatically
+
+/* Nichtterminalsymbole */
+non terminal Stm Stm;
+non terminal Exp Exp;
+non terminal List<Exp> ExpList;
+
+/* Praezedenzregeln */
+precedence right SEMICOLON;
+precedence left EQ;
+precedence left PRINT;
+precedence left PLUS, MINUS;
+precedence left TIMES, DIVIDE;
+
+/* Startsymbol */
+start with Stm;
+
+/* Grammatik */
+Stm ::= IDENTIFIER:i EQ Exp:e
+          {: RESULT = new Stm.AssignStm(i, e); :}
+      | PRINT LPAREN ExpList:es RPAREN
+          {: RESULT = new Stm.PrintStm(es); :}
+      | Stm:s1 SEMICOLON Stm:s2
+          {: RESULT = new Stm.CompoundStm(s1, s2); :}
+      ;
+
+Exp ::= Exp:e1 PLUS Exp:e2
+          {: RESULT = new Exp.OpExp(e1, Exp.OpExp.Binop.PLUS, e2); :}
+      | Exp:e1 MINUS Exp:e2
+          {: RESULT = new Exp.OpExp(e1, Exp.OpExp.Binop.MINUS, e2); :}
+      | Exp:e1 TIMES Exp:e2
+          {: RESULT = new Exp.OpExp(e1, Exp.OpExp.Binop.TIMES, e2); :}
+      | Exp:e1 DIVIDE Exp:e2
+          {: RESULT = new Exp.OpExp(e1, Exp.OpExp.Binop.DIVIDE, e2); :}
+       | IDENTIFIER:i
+          {: RESULT = new Exp.IdExp(i); :}
+       | INT:num
+          {: RESULT = new Exp.NumExp(num); :}
+       | LPAREN Exp:e RPAREN
+          {: RESULT = e; :}
+       | LPAREN Stm:s COMMA Exp:e RPAREN
+          {: RESULT = new Exp.EseqExp(s,e); :}
+       ;
+
+ExpList ::= Exp:e
+              {: RESULT = Collections.singletonList(e); :}
+           | ExpList:es COMMA Exp:e
+              {: LinkedList<Exp> exps = new LinkedList<Exp>(es);
+                 exps.add(e);
+                 RESULT = exps;
+              :}
+           ;

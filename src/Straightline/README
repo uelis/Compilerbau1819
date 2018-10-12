@@ -1,0 +1,12 @@
+Die Progamme lassen sich mit gradle uebersetzen.
+
+ ./gradlew build
+
+Nach der Uebersetzung laesst sich das Programm so ausfuehren:
+
+  java -jar build/libs/Straightline.jar <Eingabedatei>
+
+Im Verzeichnis examples gibt es einige Beispielprogramme. Beispiel:
+
+  java -jar build/libs/Straightline.jar examples/t3.sl
+
