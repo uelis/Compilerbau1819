@@ -12,6 +12,14 @@ dependencies {
   compile files('java-cup-11a.jar')
 }
 
+sourceSets {
+    main {
+        java {
+            srcDirs += ["${buildDir}/generated-src/jflex/"]
+        }
+    }
+}
+
 task parser {
   javaexec {
     main = '-jar'
@@ -33,6 +41,7 @@ jar {
   }
 }
 compileJava.dependsOn parser
+
 
 mainClassName = 'Main'
 jar.enabled = false
