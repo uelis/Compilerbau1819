@@ -1,0 +1,25 @@
+Diese Beispiele sind entweder selbst groesser oder erzeugen eine
+grosse Ausgabe.
+
+Die folgenden Beispielprogramme erzeugen Bilddateien im PPM-Format.
+  Raytrace.java
+  RaytraceAndGauss.java
+  Mandelbrot.java
+
+PPM-Dateien können mit den meisten Bildbetrachtern angezeigt werden,
+z.B. mit Gimp. Die Ausgabe des Raytracers kann so angezeigt werden.
+
+  javac Raytrace.java
+  java Raytrace > bild.ppm
+  gimp bild.ppm
+
+
+Die Beispielprogramme
+
+  MandelbrotAnim.java
+  GameOfLifeAnim.java
+
+zweigen eine Animation im Terminal an. Die Anzeige erfolgt mit
+ANSI Escape Codes <https://en.wikipedia.org/wiki/ANSI_escape_code>.
+
+
