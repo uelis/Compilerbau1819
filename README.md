@@ -11,3 +11,7 @@ aktualisiert.
 ## Übung 1
 
 [Programmrahmen für den Straightline-Interpreter](src/Straightline)
+
+## Übung 2
+
+[Lexer und Parser für Straightline-Programme](src/StraightlineParser)

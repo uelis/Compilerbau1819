@@ -1,0 +1,70 @@
+
+parser code  {: :};
+
+/* Terminalsymbole: 
+ * JavaCup erzeugt eine Datei Parser_sym.java (Name per Kommandozeile einstellbar), 
+ * mit einer Klasse, die für jedes Token eine Konstante enthält. Der Lexer 
+ * hat die Aufgabe, den Eingabestring in eine Folge von solchen Tokens 
+ * umzuwandeln. In der jflex-Datei werden also Konstanten wie Parser_sym.EQ
+ * erwähnt. */
+terminal String IDENTIFIER;
+terminal Integer INT;
+terminal PRINT;
+terminal EQ;
+terminal PLUS;
+terminal MINUS;
+terminal TIMES;
+terminal DIVIDE;
+terminal COMMA;
+terminal LPAREN;
+terminal RPAREN;
+terminal SEMICOLON;
+// EOF is created automatically
+
+/* Nichtterminalsymbole */
+non terminal Stm;
+non terminal Exp;
+non terminal ExpList;
+
+/* Praezedenzregeln */
+precedence right SEMICOLON;
+precedence left EQ;
+precedence left PRINT;
+precedence left PLUS, MINUS;
+precedence left TIMES, DIVIDE;
+
+/* Startsymbol */
+start with Stm;
+
+/* Grammatik */
+Stm ::= IDENTIFIER EQ Exp
+          {: :}
+      | PRINT LPAREN ExpList:es RPAREN
+          {: :}
+      | Stm SEMICOLON Stm
+          {: :}
+      ;
+
+Exp ::= Exp:e1 PLUS Exp:e2
+          {: :}
+      | Exp:e1 MINUS Exp:e2
+          {: :}
+      | Exp:e1 TIMES Exp:e2
+          {: :}
+      | Exp:e1 DIVIDE Exp:e2
+          {: :}
+       | IDENTIFIER:i
+          {: :}
+       | INT:num
+          {: :}
+       | LPAREN Exp:e RPAREN
+          {: :}
+       | LPAREN Stm:s COMMA Exp:e RPAREN
+          {: :}
+       ;
+
+ExpList ::= Exp:e
+              {: :}
+           | ExpList:es COMMA Exp:e
+              {: :}
+           ;

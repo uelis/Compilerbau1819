@@ -1,0 +1,12 @@
+[package]
+name = "straightline"
+version = "0.1.0"
+authors = ["Ulrich Schoepp <schoepp@tcs.ifi.lmu.de>"]
+
+[build-dependencies]
+lalrpop = "0.16.0"
+
+[dependencies]
+lalrpop-util = "0.16.0"
+unicode-xid = "0.1.0"
+

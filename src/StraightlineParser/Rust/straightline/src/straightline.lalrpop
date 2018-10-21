@@ -1,0 +1,63 @@
+use lexer::{Tok, Error};
+use ast::*;
+
+grammar<'input>;
+
+Comma<T>: Vec<T> = {
+  () => { vec!() },
+  <v:(<T> ",")*> <e:T> => {
+   let mut w = v;
+   w.push(e);
+   w
+  }
+};
+
+pub Stm: Stm<'input> = {
+    <s1: Stm1> ";" <s2: Stm> => Stm::Seq(Box::new(s1), Box::new(s2)),
+    <s: Stm1> => s
+};
+
+Stm1: Stm<'input> = {
+    <id: "Id"> "=" <e: Exp> => Stm::Assign(id, Box::new(e)),
+    "print" "(" <es: Comma<Exp>> ")" => Stm::Print(es),
+};
+
+Exp: Exp<'input> = {
+    <e1: Exp> "+" <e2: Factor> => Exp::Op(Box::new(e1), Binop::Add, Box::new(e2)),
+    <e1: Exp> "-" <e2: Factor> => Exp::Op(Box::new(e1), Binop::Sub, Box::new(e2)),
+    <e: Factor> => e,
+};
+
+Factor: Exp<'input> = {
+    <e1: Factor> "*" <e2: Atom> => Exp::Op(Box::new(e1), Binop::Mul, Box::new(e2)),
+    <e1: Factor> "/" <e2: Atom> => Exp::Op(Box::new(e1), Binop::Div, Box::new(e2)),
+    <e: Atom> => e
+};
+
+Atom: Exp<'input> = {
+    <i: "Id"> => Exp::Id(i),
+    <n: "Num"> => Exp::Num(n),
+    "(" <s: Stm> "," <e: Exp> ")" => Exp::ESeq(Box::new(s), Box::new(e)),
+    "(" <e: Exp> ")" => e
+};
+
+extern {
+    type Location = usize;
+    type Error = Error;
+    enum Tok<'input> {
+        "print" => Tok::Print,
+
+        "," => Tok::Comma,
+        ";" => Tok::Semicolon,
+        "(" => Tok::LeftParen,
+        ")" => Tok::RightParen,
+        "=" => Tok::Equals,
+        "+" => Tok::Plus,
+        "-" => Tok::Minus,
+        "*" => Tok::Star,
+        "/" => Tok::Slash,
+
+        "Id" => Tok::Id(<&'input str>),
+        "Num" => Tok::Num(<i32>),
+    }
+}
