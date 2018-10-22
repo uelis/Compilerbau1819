@@ -12,6 +12,7 @@ aktualisiert.
 
 - [Grammatik](minijava.txt)
 - [Beispielprogramme](src/MiniJava_Examples)
+- [Präzedenzen der Operatoren in Java](https://introcs.cs.princeton.edu/java/11precedence/)
 
 ## Übung 1
 
