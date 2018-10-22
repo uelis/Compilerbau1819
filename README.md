@@ -8,6 +8,11 @@ Wintersemester 2018/19.
 Die [Vorlesungsfolien](lecture/slides.pdf) werden wöchentlich
 aktualisiert.
 
+## Minijava
+
+- [Grammatik](minijava.txt)
+- [Beispielprogramme](src/MiniJava_Examples)
+
 ## Übung 1
 
 [Programmrahmen für den Straightline-Interpreter](src/Straightline)
