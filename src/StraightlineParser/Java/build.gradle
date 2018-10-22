@@ -23,16 +23,18 @@ sourceSets {
 
 task parser {
   doFirst { mkdir "${buildDir}/generated-src/cup" }
-  javaexec {
-    main = '-jar'
-      workingDir = 'src/main/java'
-      args = [
-      file('java-cup-11a.jar'),
-      '-symbols', 'Parser_sym',
-      '-parser', 'Parser',
-      '-destdir', "${buildDir}/generated-src/cup/",
-      file('src/main/java/Parser.cup')
-      ]
+  doLast {
+    javaexec {
+      main = '-jar'
+        workingDir = 'src/main/java'
+        args = [
+        file('java-cup-11a.jar'),
+        '-symbols', 'Parser_sym',
+        '-parser', 'Parser',
+        '-destdir', "${buildDir}/generated-src/cup/",
+        file('src/main/java/Parser.cup')
+        ]
+    }
   }
 }
 
