@@ -1,0 +1,36 @@
+parser code  {:
+:};
+
+
+/* Terminalsymbole, die vom Lexer produziert werden. */
+terminal A;
+terminal B;
+terminal C;
+terminal D;
+
+/* Nichtterminalsymbole */
+non terminal S;
+non terminal DAlist;
+non terminal DBlist;
+non terminal DBlist1;
+
+/* Startsymbol */
+start with S;
+
+S ::= DAlist DBlist C
+    ;
+
+DAlist ::=
+    DAlist D A
+  |
+  ;
+
+DBlist1 ::=
+    DBlist1 D B
+  | D B
+  ;
+
+DBlist ::=
+    DBlist1
+  |
+  ;

@@ -1,0 +1,34 @@
+parser code  {:
+:};
+
+
+/* Terminalsymbole, die vom Lexer produziert werden. */
+terminal A;
+terminal B;
+terminal C;
+terminal D;
+
+/* Nichtterminalsymbole */
+non terminal S;
+non terminal DAlist;
+non terminal DBlist;
+
+/* Startsymbol */
+start with S;
+
+/* Beachte: Auf DBList kann in dieser Grammatik nur C folgen. 
+   Das loest den Konflikt mit "DAlist ::= DAList (*) D A" auf.
+*/
+
+S ::= DAlist DBlist C
+    ;
+
+DAlist ::=
+    DAlist D A
+  |
+  ;
+
+DBlist ::=
+    D B DBlist
+  |
+  ;

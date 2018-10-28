@@ -1,0 +1,34 @@
+/*
+  java -jar java-cup-11a.jar -dump lists_problem.cup
+*/
+
+parser code  {:
+:};
+
+
+/* Terminalsymbole, die vom Lexer produziert werden. */
+terminal A;
+terminal B;
+terminal C;
+terminal D;
+
+/* Nichtterminalsymbole */
+non terminal S;
+non terminal DAlist;
+non terminal DBlist;
+
+/* Startsymbol */
+start with S;
+
+S ::= DAlist DBlist C
+    ;
+
+DAlist ::=
+    DAlist D A
+  |
+  ;
+
+DBlist ::=
+    DBlist D B
+  |
+  ;
