@@ -21,3 +21,15 @@ aktualisiert.
 ## Übung 2
 
 [Lexer und Parser für Straightline-Programme](src/StraightlineParser)
+
+## Übung 3
+
+Beispiel zur Lösung von Konflikten:
+- [Grammatik mit Konflikten](lecture/lists_problem.cup)
+- [Lösung 1](lecture/lists_solution1.cup)
+- [Lösung 2](lecture/lists_solution2.cup)
+
+Datentypen für die abstrakte Syntax von Minijava:
+- [Java](src/Java)
+- [Haskell](src/Haskell)
+- [Rust](src/Rust)
