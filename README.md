@@ -14,15 +14,15 @@ aktualisiert.
 - [Beispielprogramme](src/MiniJava_Examples)
 - [Präzedenzen der Operatoren in Java](https://introcs.cs.princeton.edu/java/11precedence/)
 
-## Übung 1
+## Übung 1 (15.10.)
 
 [Programmrahmen für den Straightline-Interpreter](src/Straightline)
 
-## Übung 2
+## Übung 2 (22.10.)
 
 [Lexer und Parser für Straightline-Programme](src/StraightlineParser)
 
-## Übung 3
+## Übung 3 (29.10.)
 
 Beispiel zur Lösung von Konflikten:
 - [Grammatik mit Konflikten](lecture/lists_problem.cup)
@@ -33,3 +33,12 @@ Datentypen für die abstrakte Syntax von Minijava:
 - [Java](src/Java)
 - [Haskell](src/Haskell)
 - [Rust](src/Rust)
+
+## Übung 4 (05.11.)
+
+Fertigstellung des Parsers, Beginn Symboltabelle und Typchecker
+
+## Übung 5 (12.11.)
+
+Fertigstellung Symboltabelle und Typchecker
+
