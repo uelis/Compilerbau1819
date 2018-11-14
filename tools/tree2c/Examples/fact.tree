@@ -1,0 +1,38 @@
+// Benutzung:
+//
+//   ./tree2c fact.tree > fact.c
+//   gcc -m32 -o fact fact.c runtime.c
+//   ./fact
+
+
+// Methodenname(Anzahl der Parameter)
+Lmain(1) {
+
+    // Hier eine Liste von Stms, einfach hintereinander geschrieben
+    MOVE(TEMP(t0), CALL(NAME(L_println_int),
+         CALL(NAME(LFac$ComputeFac),
+               CALL(NAME(L_halloc), CONST(4)), CONST(10))
+         ))
+    MOVE(TEMP(t1),
+        ESEQ(MOVE(TEMP(t42), CONST(1)),
+              MOVE(TEMP(t2), BINOP(MINUS, CONST(1), TEMP(t42))),
+             TEMP(t2)))
+
+    // Rueckgabe muss ein Temporary sein
+    return t1
+}
+
+LFac$ComputeFac(2) {
+
+    CJUMP(LT, PARAM(1), CONST(1), L$0, L$1)
+LABEL(L$1)
+    MOVE(TEMP(t5), BINOP(MUL, PARAM(1),
+             CALL(NAME(LFac$ComputeFac), PARAM(0), BINOP(MINUS, PARAM(1), CONST(1)))))
+    JUMP(NAME(L$2), L$2)
+LABEL(L$0)
+    MOVE(TEMP(t5), CONST(1))
+LABEL(L$2)
+    MOVE(TEMP(t4), TEMP(t5))
+
+    return t4
+}

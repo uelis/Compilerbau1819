@@ -1,0 +1,32 @@
+LFibClass$nfib(2){
+  LABEL(t20)
+  CJUMP(GE, PARAM(1), CONST(2), t0, t1)
+  LABEL(t1)
+  MOVE(TEMP(res), CONST(1))
+  JUMP(NAME(t4), t4)
+  LABEL(t4)
+  JUMP(NAME(t7), t7)
+  LABEL(t7)
+  MOVE(TEMP(t9), TEMP(res))
+  JUMP(NAME(t19), t19)
+  LABEL(t0)
+  MOVE(TEMP(t14), CALL(NAME(LFibClass$nfib), PARAM(0), BINOP(MINUS, PARAM(1), CONST(1))))
+  MOVE(TEMP(t16), TEMP(t14))
+  MOVE(TEMP(t15), CALL(NAME(LFibClass$nfib), PARAM(0), BINOP(MINUS, PARAM(1), CONST(2))))
+  MOVE(TEMP(res), BINOP(PLUS, BINOP(PLUS, TEMP(t16), TEMP(t15)), CONST(1)))
+  JUMP(NAME(t4), t4)
+  LABEL(t19)
+  return t9
+}
+
+Lmain(1){
+  LABEL(t22)
+  MOVE(TEMP(t17), CALL(NAME(L_halloc), CONST(4)))
+  MOVE(TEMP(t18), CALL(NAME(LFibClass$nfib), TEMP(t17), CONST(20)))
+  MOVE(TEMP(t12), CALL(NAME(L_println_int), TEMP(t18)))
+  MOVE(TEMP(t13), CONST(0))
+  JUMP(NAME(t21), t21)
+  LABEL(t21)
+  return t13
+}
+

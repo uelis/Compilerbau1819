@@ -1,0 +1,39 @@
+LAA$run(1){
+  LABEL(t22)
+  MOVE(TEMP(t2), CONST(2))
+  MOVE(TEMP(t3), CALL(NAME(L_halloc), BINOP(MUL, BINOP(PLUS, TEMP(t2), CONST(1)), CONST(4))))
+  MOVE(MEM(TEMP(t3)), TEMP(t2))
+  MOVE(TEMP(arr), TEMP(t3))
+  MOVE(TEMP(t6), TEMP(arr))
+  CJUMP(GE, CONST(0), MEM(TEMP(t6)), LAA$run$raise, t5)
+  LABEL(t5)
+  MOVE(MEM(BINOP(PLUS, TEMP(t6), CONST(4))), CONST(5))
+  MOVE(TEMP(t8), TEMP(arr))
+  CJUMP(GE, CONST(1), MEM(TEMP(t8)), LAA$run$raise, t7)
+  LABEL(t7)
+  MOVE(MEM(BINOP(PLUS, TEMP(t8), CONST(8))), CONST(10))
+  JUMP(NAME(t10), t10)
+  LABEL(t10)
+  MOVE(TEMP(t13), TEMP(arr))
+  CJUMP(GE, CONST(0), MEM(TEMP(t13)), LAA$run$raise, t12)
+  LABEL(t12)
+  MOVE(TEMP(t14), MEM(BINOP(PLUS, TEMP(t13), CONST(4))))
+  JUMP(NAME(t21), t21)
+  LABEL(LAA$run$raise)
+  MOVE(TEMP(t11), CALL(NAME(L_raise), CONST(-1)))
+  JUMP(NAME(t10), t10)
+  LABEL(t21)
+  return t14
+}
+
+Lmain(1){
+  LABEL(t24)
+  MOVE(TEMP(t19), CALL(NAME(L_halloc), CONST(4)))
+  MOVE(TEMP(t20), CALL(NAME(LAA$run), TEMP(t19)))
+  MOVE(TEMP(t17), CALL(NAME(L_println_int), TEMP(t20)))
+  MOVE(TEMP(t18), CONST(0))
+  JUMP(NAME(t23), t23)
+  LABEL(t23)
+  return t18
+}
+
