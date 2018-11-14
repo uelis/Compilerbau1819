@@ -52,7 +52,7 @@ Datentypen für die abstrakte Syntax der Zwischensprache:
 - [Rust](src/Rust)
 
 Zum Testen können Programme des Tree-Zwischencodes in C-Programme übersetzt werden.
-- Java: Die Methode [CmmPrinter.prgToCmm](src/Java/minijava/intermediate/CmmPrinter.Java) kann ein Tree-Programm direkt in ein C-Programm umwandeln.
+- Java: Die Methode [CmmPrinter.prgToCmm](src/Java/minijava/intermediate/CmmPrinter.java) kann ein Tree-Programm direkt in ein C-Programm umwandeln.
 - Haskell/Rust: Das externe Tool [tree2c](tools/tree2c) übersetzt Tree-Programme nach C.
 
 Der so generierte C-Code kann z.B. so übersetzt werden
