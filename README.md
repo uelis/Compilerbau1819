@@ -42,3 +42,12 @@ Fertigstellung des Parsers, Beginn Symboltabelle und Typchecker
 
 Fertigstellung Symboltabelle und Typchecker
 
+## Übung 6 (19.11.)
+
+Übersetzung in Zwischensprache
+
+Datentypen für die abstrakte Syntax der Zwischensprache:
+- [Java](src/Java)
+- [Haskell](src/Haskell)
+- [Rust](src/Rust)
+
