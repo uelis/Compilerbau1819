@@ -47,7 +47,16 @@ Fertigstellung Symboltabelle und Typchecker
 Übersetzung in Zwischensprache
 
 Datentypen für die abstrakte Syntax der Zwischensprache:
-- [Java](src/Java)
+- [Java](src/Java/minijava/intermediate)
 - [Haskell](src/Haskell)
 - [Rust](src/Rust)
 
+Zum Testen können Programme des Tree-Zwischencodes in C-Programme übersetzt werden.
+- Java: Die Methode [CmmPrinter.prgToCmm](src/Java/minijava/intermediate/CmmPrinter.Java) kann ein Tree-Programm direkt in ein C-Programm umwandeln.
+- Haskell/Rust: Das externes Tool [tree2c](tools/tree2c) übersetzt Tree-Programme nach C.
+
+Der so generierte C-Code in `program.c` kann mit z.B. so übersetzt werden
+```
+  gcc -m32 program.c runtime.c  
+```
+Es wird die Datei [runtime.c](tools/tree2c/runtime.c) verwendet.
