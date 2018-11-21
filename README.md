@@ -60,3 +60,8 @@ Der so generierte C-Code kann z.B. so übersetzt werden
   gcc -m32 generierter_code.c runtime.c  
 ```
 Es wird die Datei [runtime.c](tools/tree2c/runtime.c) verwendet.
+
+## Übung 7 (26.11.)
+
+Fertigstellung der Übersetzung in die Zwischensprache
+
