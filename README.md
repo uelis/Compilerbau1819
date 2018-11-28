@@ -65,3 +65,8 @@ Es wird die Datei [runtime.c](tools/tree2c/runtime.c) verwendet.
 
 Fertigstellung der Übersetzung in die Zwischensprache
 
+## Übung 8 (03.12.)
+
+Tracing 
+
+
