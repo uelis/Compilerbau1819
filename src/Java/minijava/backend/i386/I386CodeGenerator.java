@@ -2,7 +2,7 @@ package minijava.backend.i386;
 
 import minijava.backend.CodeGenerator;
 import minijava.intermediate.Temp;
-import minijava.intermediate.tree.TreeMethod;
+import minijava.intermediate.tree.TreeFunction;
 import minijava.intermediate.tree.TreePrg;
 
 import java.util.ArrayList;

@@ -25,7 +25,7 @@ public interface CodeGenerator {
   List<Temp> getGeneralPurposeRegisters();
 
   /**
-   * TreeMethod for compiling whole program.
+   * Method for compiling whole program.
    */
   MachinePrg codeGen(TreePrg frag);
 
