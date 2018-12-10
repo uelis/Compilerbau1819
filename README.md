@@ -57,7 +57,7 @@ Zum Testen können Programme des Tree-Zwischencodes in C-Programme übersetzt we
 
 Der so generierte C-Code kann z.B. so übersetzt werden
 ```
-  gcc -m32 generierter_code.c runtime.c  
+  gcc -m32 generierter_code.c runtime.c
 ```
 Es wird die Datei [runtime.c](tools/tree2c/runtime.c) verwendet.
 
@@ -67,6 +67,22 @@ Fertigstellung der Übersetzung in die Zwischensprache
 
 ## Übung 8 (03.12.)
 
-Tracing 
+Tracing
 
+## Übung 9 (10.12.)
 
+Instruktionsauswahl
+
+Interfaces des Backends:
+- [Java](src/Java/minijava/backend)
+- [Haskell](src/Haskell/Backend.hs)
+- [Rust](src/Rust/backend.rs)
+
+Gerüst eines x86-Backends:
+- [Java](src/Java/minijava/backend/i386)
+- [Haskell](src/Haskell) (mit 'X86' beginnende Dateien)
+- [Rust](src/Rust/x86)
+
+## Übung 10 (17.12.)
+
+Instruktionsauswahl
