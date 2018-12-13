@@ -188,7 +188,7 @@ cdq (Val SignedInt x) = return $ (Val SignedInt x1, Val SignedInt x2)
 cdq x = fail $ "cannot convert signed " ++ show x ++ " from 32bit to 64bit"
 
 imul :: Monad m => Val -> Val -> m (Val, Val)
-imul (Val SignedInt x) (Val SignedIn y) = do
+imul (Val SignedInt x) (Val SignedInt y) = do
   let r :: Int64 = (fromIntegral x :: Int64) * (fromIntegral y :: Int64)
   let (# h, l #) = splitQ r
   return (Val SignedInt h, Val SignedInt l)
