@@ -5,6 +5,8 @@
 
 ## Installation
 
+Eine vorkompilierte Datei (ausführbar im CIP-pool) ist enthalten: [tree2c](./tree2c).
+
 Für die Installation wird GHC benötigt. Die nötigen Dateien kann man
 einfach automatisch mit Stack (https://www.haskellstack.org/) installieren.
 Dann kann `tree2c` einfach mit
@@ -21,9 +23,9 @@ cabal install
 ## Verwendung
 
 `tree2c` liest die Datei, die im ersten Argument angegeben ist,
-übersetzt sie nach C und schreibt das Ergebnis nach `stdout`. Wenn 
+übersetzt sie nach C und schreibt das Ergebnis nach `stdout`. Wenn
 kein erstes Argument angegeben ist, wird die Eingable von `stdin`
-gelesen. Das produzierte C-Programm kann zusammen mit der Datei 
+gelesen. Das produzierte C-Programm kann zusammen mit der Datei
 `runtime.c` zu einer ausführbaren Datei übersetzt werden.
 
 Umwandeln von [fact.tree](Examples/fact.tree) nach `fact.c`:
@@ -36,8 +38,7 @@ Umwandeln von [fact.tree](Examples/fact.tree) nach `fact.c`:
 ```
 Das flag -m32 ist wichtig, damit im 32-Bit-Modus übersetzt wird.
 
-Ausführen der übersetzten Datei:   
+Ausführen der übersetzten Datei:
 ```
    ./fact
-```   
-
+```
