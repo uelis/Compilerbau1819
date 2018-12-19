@@ -1,6 +1,6 @@
 use ident::{Ident, Label};
-use std::fmt::{Debug, Display};
 use tree;
+use std::fmt::{Debug, Display};
 
 pub trait MachineInstr {
     type UseIterator: Iterator<Item = Ident>;
@@ -29,7 +29,9 @@ pub trait MachineFunction<A: MachineInstr>: Debug {
     fn rename(&mut self, sigma: &Fn(Ident) -> Ident);
 }
 
-pub trait MachinePrg<A: MachineInstr, F: MachineFunction<A>>: Debug + Display {
+pub trait MachinePrg<A: MachineInstr, F: MachineFunction<A>>:
+    Debug + Display
+{
     fn functions(&self) -> &Vec<F>;
     fn functions_mut(&mut self) -> &mut Vec<F>;
 }
@@ -39,5 +41,7 @@ pub trait Backend {
     type Function: MachineFunction<Self::Instr>;
     type Prg: MachinePrg<Self::Instr, Self::Function>;
 
+    fn all_registers() -> Vec<Ident>;
+    fn general_purpose_registers() -> Vec<Ident>;
     fn code_gen(c: &tree::Prg) -> Self::Prg;
 }
