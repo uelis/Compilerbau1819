@@ -5,10 +5,10 @@ import Pretty
 
 -- temps
 
-newtype Temp = Temp Int deriving (Eq, Ord)
+newtype Temp = Temp String deriving (Eq, Ord)
 
 instance Show Temp where
-    show (Temp i) = "t" ++ show i
+    show (Temp i) = "t" ++ i
 
 instance Pretty Temp where
     ppr t = text $ show t

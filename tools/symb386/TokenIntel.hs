@@ -53,7 +53,7 @@ data TokenKind =
  | Nat Int       -- positive number or zero
  | Label String
  | Reg Reg32
- | Temp Int
+ | Temp String
  | Id String
  deriving Show
 

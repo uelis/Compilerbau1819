@@ -100,7 +100,7 @@ tokens :-
   ptr  { mkToken Token.Ptr }
 
   $digit+{ \p s -> mkToken (Nat (read s)) p s }
-  "t"[$digit]*    { \ p ('t':s) -> mkToken (Temp (read s)) p s }
+  "t"[$letter $digit]*    { \ p ('t':s) -> mkToken (Temp s) p s }
   "eax" { mkToken (Reg eax) }
   "ebx" { mkToken (Reg ebx) }
   "ecx" { mkToken (Reg ecx) }
