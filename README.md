@@ -86,3 +86,11 @@ Gerüst eines x86-Backends:
 ## Übung 10 (17.12.)
 
 Instruktionsauswahl
+
+## Übung 11 (07.01.)
+
+Interferenzanalyse
+
+## Übung 12 (14.01.)
+
+Registerallokation
