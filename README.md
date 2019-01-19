@@ -94,3 +94,7 @@ Interferenzanalyse
 ## Übung 12 (14.01.)
 
 Registerallokation
+
+## Übung 13 (21.01.)
+
+Registerallokation
