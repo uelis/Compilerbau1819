@@ -98,3 +98,12 @@ Registerallokation
 ## Übung 13 (21.01.)
 
 Registerallokation
+
+## Übung 14 (28.01.)
+
+Fertigstellung des Compilers / optionale Aufgaben
+
+## Übung 15 (04.02.)
+
+Fertigstellung des Compilers / optionale Aufgaben
+
