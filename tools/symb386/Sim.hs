@@ -598,7 +598,18 @@ exec !verbose !prg !pc0 = do
       when verbose $ do
           liftIO $ hPutStrLn stderr $ "executing " ++ (show i)
       pc' <- exec' i pc
+      when (verbose && canModifyRegs i) $ do
+          let registers = [eax, ebx, ecx, edx, esi, edi, ebp, esp]
+          let names = ["eax", "ebx", "ecx", "edx", "esi", "edi", "ebp", "esp"]
+          values <- map (('=':).show) <$> mapM getReg registers
+          let results = zipWith (++) names values
+          liftIO $ hPutStrLn stderr $ take 26 (repeat ' ') ++ "==> " ++ unwords results
       execLoop pc'
+      where canModifyRegs :: Instr -> Bool
+            canModifyRegs (LABEL _) = False
+            canModifyRegs (JMP _) = False
+            canModifyRegs (J _ _) = False
+            canModifyRegs _ = True
 
     exec' :: (MonadIO m, MonadReader St m) => Instr -> Int32 -> m Int32
     exec' (LABEL _) pc =
