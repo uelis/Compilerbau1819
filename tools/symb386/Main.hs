@@ -19,7 +19,7 @@ data Flag
 optDescrs :: [OptDescr Flag]
 optDescrs =
   [ Option ['?'] ["help"]      (NoArg Help)    "show usage information"
-  , Option ['v'] ["verbose"]   (NoArg Verbose) "be verbose"
+  , Option ['v'] ["verbose"]   (NoArg Verbose) "be verbose (can be repeated)"
   ]
 
 usage :: IO a
