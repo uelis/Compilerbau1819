@@ -29,14 +29,14 @@ usage = do
 
 -- | Extract the input file name from command line.
 --   Display usage info for malformed command lines.
-parseCmdLine :: [String] -> IO (String, Bool)
+parseCmdLine :: [String] -> IO (String, Int)
 parseCmdLine argv = do
   let (os, ns, _) = getOpt Permute optDescrs argv
   unless (length ns == 1)
     usage
   let prgFile = head ns
-      verbose = Verbose `elem` os
-  when verbose $
+      verbose = length $ filter (Verbose==) os
+  when (verbose > 0) $
     hPutStrLn stderr $ "Reading program from file: " ++ prgFile
   when (Help `elem` os) $
     ioError (userError "No execution with --help")
@@ -51,4 +51,4 @@ main = do
   (prgFile, verbose) <- parseCmdLine cmdLine
   input   <- readFile prgFile
   let instr = parse (alexScanTokens input)
-  run verbose instr  
+  run verbose instr
