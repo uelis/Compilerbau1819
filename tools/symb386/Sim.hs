@@ -583,7 +583,7 @@ pop = do
   setReg esp $ plus_imm sp (fromIntegral wordSize)
   return v
 
-exec :: (MonadIO m, MonadReader St m) => Bool -> Prg -> Int32 -> m ()
+exec :: (MonadIO m, MonadReader St m) => Int -> Prg -> Int32 -> m ()
 exec !verbose !prg !pc0 = do
   -- put -1 as exit return address on stack
   push (Val CodeAddr (-1))
@@ -595,10 +595,21 @@ exec !verbose !prg !pc0 = do
     execLoop !pc | pc == -1 = return ()
     execLoop !pc = do
       i <- getInstr pc prg
-      when verbose $ do
+      when (verbose > 0) $ do
           liftIO $ hPutStrLn stderr $ "executing " ++ (show i)
       pc' <- exec' i pc
+      when (verbose > 1 && canModifyRegs i) $ do
+          let registers = [eax, ebx, ecx, edx, esi, edi, ebp, esp]
+          let names = ["eax", "ebx", "ecx", "edx", "esi", "edi", "ebp", "esp"]
+          values <- map (('=':).show) <$> mapM getReg registers
+          let results = zipWith (++) names values
+          liftIO $ hPutStrLn stderr $ take 26 (repeat ' ') ++ "==> " ++ unwords results
       execLoop pc'
+      where canModifyRegs :: Instr -> Bool
+            canModifyRegs (LABEL _) = False
+            canModifyRegs (JMP _) = False
+            canModifyRegs (J _ _) = False
+            canModifyRegs _ = True
 
     exec' :: (MonadIO m, MonadReader St m) => Instr -> Int32 -> m Int32
     exec' (LABEL _) pc =
@@ -781,7 +792,7 @@ exec !verbose !prg !pc0 = do
 newtype Sim a = Sim { unSim :: (ReaderT St IO) a }
   deriving (Functor, Applicative, Monad, MonadReader St, MonadIO)
 
-run :: Bool -> [Instr] -> IO ()
+run :: Int -> [Instr] -> IO ()
 run verbose is = do
   hSetEncoding stdin char8 -- make sure that read reads bytes
   let labelMap = labels is
